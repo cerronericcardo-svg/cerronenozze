@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Riccardo e Giulia si sposano. Programma, location, informazioni utili e conferma di presenza.">
+<title>Cerrone Nozze</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* ============================================================
+   SEGNAPOSTO DA PERSONALIZZARE
+   Tutti i testi provvisori sono marcati con class="ph" nell'HTML
+   e la data delle nozze sta in DATA_NOZZE, in fondo al file.
+   ============================================================ */
+
+:root{
+  --ground:#EFF2F1;
+  --surface:#FFFFFF;
+  --surface-2:#E7ECEA;
+  --ink:#10262A;
+  --ink-soft:#4B6462;
+  --line:#D2DDDA;
+  --sea:#0C5D63;
+  --sea-deep:#073B40;
+  --sea-tint:#DCE9E8;
+  --lemon:#C98A0A;
+  --lemon-bright:#E6A517;
+  --ph-bg:#FBEBC6;
+  --ph-line:#C98A0A;
+  --shadow:0 1px 2px rgba(7,59,64,.06), 0 8px 24px -12px rgba(7,59,64,.18);
+
+  --f-display:"Bodoni Moda", "Didot", "Times New Roman", serif;
+  --f-body:"Karla", "Helvetica Neue", Arial, sans-serif;
+
+  --step--1:clamp(.78rem,.76rem + .1vw,.84rem);
+  --step-0:clamp(1rem,.97rem + .16vw,1.09rem);
+  --step-1:clamp(1.2rem,1.13rem + .35vw,1.42rem);
+  --step-2:clamp(1.5rem,1.36rem + .7vw,2rem);
+  --step-3:clamp(1.95rem,1.66rem + 1.45vw,3rem);
+  --step-4:clamp(2.7rem,1.9rem + 4vw,5.4rem);
+
+  --gutter:clamp(1rem,5vw,2.5rem);
+  --measure:63ch;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0A1719;
+    --surface:#0F2125;
+    --surface-2:#142B2F;
+    --ink:#E7F0EE;
+    --ink-soft:#9BB4B1;
+    --line:#1F3B3E;
+    --sea:#6CC2BC;
+    --sea-deep:#A9DBD5;
+    --sea-tint:#132F32;
+    --lemon:#F0B838;
+    --lemon-bright:#F0B838;
+    --ph-bg:#33290D;
+    --ph-line:#F0B838;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0A1719;
+  --surface:#0F2125;
+  --surface-2:#142B2F;
+  --ink:#E7F0EE;
+  --ink-soft:#9BB4B1;
+  --line:#1F3B3E;
+  --sea:#6CC2BC;
+  --sea-deep:#A9DBD5;
+  --sea-tint:#132F32;
+  --lemon:#F0B838;
+  --lemon-bright:#F0B838;
+  --ph-bg:#33290D;
+  --ph-line:#F0B838;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:var(--step-0);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:400}
+p{margin:0}
+a{color:var(--sea);text-underline-offset:.2em;text-decoration-thickness:1px}
+:focus-visible{outline:2px solid var(--lemon-bright);outline-offset:3px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+
+.wrap{width:100%;max-width:1120px;margin-inline:auto;padding-inline:var(--gutter)}
+.eyebrow{
+  font-size:var(--step--1);letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;color:var(--sea);margin:0;
+}
+.lede{max-width:var(--measure);color:var(--ink-soft)}
+
+/* segnaposto */
+.ph{
+  background:var(--ph-bg);
+  box-shadow:0 1px 0 var(--ph-line);
+  padding:0 .12em;
+  border-radius:2px;
+}
+/* sul lettering grande basta il filo sotto: il blocco giallo coprirebbe i nomi */
+.names .ph,.mark .ph,.sec-title .ph{background:transparent;padding:0}
+
+/* ---------- barra bozza ---------- */
+.draft{
+  background:var(--sea-deep);color:#EFF2F1;font-size:var(--step--1);
+}
+:root[data-theme="dark"] .draft,
+:root:not([data-theme="light"]) .draft{color:#EFF2F1}
+.draft .wrap{display:flex;gap:.75rem;align-items:baseline;flex-wrap:wrap;padding-block:.6rem}
+.draft b{font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:.78em}
+.draft span{opacity:.85}
+.draft i{
+  font-style:normal;background:var(--lemon-bright);color:#10262A;
+  padding:0 .3em;border-radius:2px;font-weight:600;
+}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+  background:color-mix(in srgb, var(--ground) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav .wrap{display:flex;align-items:center;gap:1.25rem;padding-block:.7rem;flex-wrap:wrap}
+.mark{
+  font-family:var(--f-display);font-size:1.05rem;letter-spacing:.02em;
+  margin-right:auto;white-space:nowrap;
+}
+.mark em{font-style:italic;color:var(--sea)}
+.nav ul{display:flex;gap:1.1rem;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.nav a{
+  color:var(--ink-soft);text-decoration:none;font-size:var(--step--1);
+  letter-spacing:.08em;text-transform:uppercase;font-weight:500;
+}
+.nav a:hover{color:var(--sea)}
+.nav .cta{
+  color:var(--sea-deep);border:1px solid var(--sea);border-radius:999px;
+  padding:.35rem .85rem;
+}
+:root[data-theme="dark"] .nav .cta,
+:root:not([data-theme="light"]) .nav .cta{color:var(--sea)}
+.nav .cta:hover{background:var(--sea);color:var(--ground)}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(3rem,9vw,7rem) clamp(2rem,5vw,3.5rem)}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:clamp(1.75rem,4vw,3rem)}
+@media (min-width:860px){.hero-grid{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:end}}
+.names{
+  font-family:var(--f-display);font-size:var(--step-4);line-height:.96;
+  letter-spacing:-.01em;margin:.4em 0 0;
+}
+.names .amp{font-style:italic;color:var(--sea);display:block;font-size:.5em;line-height:1.6;margin-left:.06em}
+.hero-date{
+  margin-top:1.4rem;font-size:var(--step-1);color:var(--ink);
+  display:flex;flex-wrap:wrap;gap:.55rem 1rem;align-items:baseline;
+}
+.hero-date .sep{color:var(--sea);opacity:.5}
+.hero-note{margin-top:.9rem;color:var(--ink-soft);max-width:44ch}
+
+.countdown{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding-block:1.25rem;display:flex;gap:1.6rem;flex-wrap:wrap;align-items:baseline;
+}
+.cd-item{display:flex;gap:.4rem;align-items:baseline}
+.cd-num{
+  font-family:var(--f-display);font-size:var(--step-3);line-height:1;
+  font-variant-numeric:tabular-nums;color:var(--sea);
+}
+.cd-lab{font-size:var(--step--1);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.cd-done{font-family:var(--f-display);font-size:var(--step-2);font-style:italic;color:var(--sea)}
+
+/* ---------- fascia maiolica ---------- */
+.tiles{display:block;width:100%;height:34px;color:var(--sea);opacity:.55}
+
+/* ---------- sezioni ---------- */
+section{padding-block:clamp(2.75rem,7vw,5rem)}
+.sec-head{display:grid;gap:.5rem;margin-bottom:clamp(1.5rem,4vw,2.5rem)}
+.sec-title{font-family:var(--f-display);font-size:var(--step-3);line-height:1.05}
+
+/* programma */
+.timeline{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.timeline li{
+  display:grid;grid-template-columns:5.5rem 1fr;gap:1rem 1.4rem;
+  padding-block:1.15rem;border-top:1px solid var(--line);align-items:start;
+}
+.timeline li:last-child{border-bottom:1px solid var(--line)}
+.t-time{
+  font-family:var(--f-display);font-size:var(--step-1);font-variant-numeric:tabular-nums;
+  color:var(--sea);line-height:1.3;
+}
+.t-name{font-size:var(--step-1);line-height:1.35}
+.t-desc{color:var(--ink-soft);margin-top:.2rem;max-width:var(--measure)}
+@media (max-width:520px){
+  .timeline li{grid-template-columns:1fr;gap:.15rem}
+}
+
+/* location */
+.places{display:grid;gap:1.25rem}
+@media (min-width:760px){.places{grid-template-columns:1fr 1fr}}
+.place{
+  background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  padding:clamp(1.25rem,3vw,1.9rem);display:flex;flex-direction:column;gap:.55rem;
+  box-shadow:var(--shadow);
+}
+.place h3{font-family:var(--f-display);font-size:var(--step-2);line-height:1.15}
+.place .addr{color:var(--ink-soft)}
+.place .map{margin-top:auto;padding-top:.9rem;font-weight:600;font-size:var(--step--1);letter-spacing:.06em;text-transform:uppercase}
+
+/* info */
+.facts{display:grid;gap:0}
+@media (min-width:700px){.facts{grid-template-columns:1fr 1fr;column-gap:clamp(2rem,5vw,4rem)}}
+.fact{padding-block:1.1rem;border-top:1px solid var(--line)}
+.fact dt{font-weight:600;letter-spacing:.09em;text-transform:uppercase;font-size:var(--step--1);color:var(--sea)}
+.fact dd{margin:.35rem 0 0;color:var(--ink-soft);max-width:var(--measure)}
+
+/* rsvp */
+.rsvp{background:var(--sea-tint)}
+form{display:grid;gap:1.1rem;max-width:44rem}
+.row{display:grid;gap:1.1rem}
+@media (min-width:640px){.row{grid-template-columns:1fr 1fr}}
+label{display:grid;gap:.35rem;font-size:var(--step--1);letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--ink-soft)}
+input,select,textarea{
+  font:inherit;text-transform:none;letter-spacing:normal;font-weight:400;
+  color:var(--ink);background:var(--surface);
+  border:1px solid var(--line);border-radius:3px;padding:.65rem .75rem;width:100%;
+}
+textarea{min-height:5.5rem;resize:vertical}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:.45rem}
+legend{font-size:var(--step--1);letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--ink-soft);padding:0}
+.choice{display:flex;gap:.55rem;align-items:center;font:inherit;text-transform:none;letter-spacing:normal;font-weight:400;color:var(--ink)}
+.choice input{width:auto}
+.send{display:flex;gap:.9rem;flex-wrap:wrap;align-items:center;margin-top:.3rem}
+.btn{
+  display:inline-block;background:var(--sea);color:var(--ground);
+  border:1px solid var(--sea);border-radius:999px;padding:.7rem 1.5rem;
+  font-weight:600;letter-spacing:.07em;text-transform:uppercase;font-size:var(--step--1);
+  text-decoration:none;cursor:pointer;
+}
+.btn:hover{background:var(--sea-deep);border-color:var(--sea-deep)}
+.btn-ghost{background:transparent;color:var(--sea);border-color:var(--line)}
+.btn-ghost:hover{background:transparent;border-color:var(--sea);color:var(--sea)}
+.send small{color:var(--ink-soft);font-size:var(--step--1)}
+
+/* regali */
+.gift{
+  background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  padding:clamp(1.25rem,3vw,1.9rem);max-width:34rem;box-shadow:var(--shadow);
+}
+.iban{
+  display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-top:.9rem;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:var(--step--1);
+  letter-spacing:.04em;
+}
+.iban code{background:var(--surface-2);padding:.5rem .7rem;border-radius:3px}
+.copy{
+  font:inherit;font-family:var(--f-body);font-size:var(--step--1);cursor:pointer;
+  background:transparent;border:1px solid var(--line);border-radius:999px;
+  padding:.35rem .9rem;color:var(--sea);width:auto;
+}
+.copy:hover{border-color:var(--sea)}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding-block:2.5rem 3rem;color:var(--ink-soft);font-size:var(--step--1)}
+footer .wrap{display:flex;gap:1rem 2rem;flex-wrap:wrap;align-items:baseline}
+footer .mark{margin-right:auto;font-size:1rem;color:var(--ink)}
+</style>
+</head>
+<body>
+
+<div class="draft">
+  <div class="wrap">
+    <b>Bozza</b>
+    <span>I testi <i>evidenziati</i> sono segnaposto: dimmi i dati veri e li sostituisco.</span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="mark"><span class="ph">Riccardo</span> <em>&amp;</em> <span class="ph">Giulia</span></div>
+    <nav aria-label="Sezioni del sito">
+      <ul>
+        <li><a href="#programma">Programma</a></li>
+        <li><a href="#dove">Dove</a></li>
+        <li><a href="#info">Info</a></li>
+        <li><a href="#regali">Regali</a></li>
+        <li><a href="#rsvp" class="cta">Conferma</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Ci sposiamo</p>
+      <h1 class="names"><span class="ph">Riccardo</span><span class="amp">e</span><span class="ph">Giulia</span></h1>
+      <p class="hero-date">
+        <span class="ph">sabato 12 giugno 2027</span>
+        <span class="sep">/</span>
+        <span class="ph">ore 11.00</span>
+        <span class="sep">/</span>
+        <span class="ph">Napoli</span>
+      </p>
+    </div>
+    <div>
+      <p class="hero-note">Siamo felici di avervi con noi. Qui trovate il programma della giornata, come arrivare e tutto quello che serve sapere. Vi chiediamo solo di confermare la presenza entro <span class="ph">il 30 aprile</span>.</p>
+      <p style="margin-top:1.2rem"><a class="btn" href="#rsvp">Conferma la presenza</a></p>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:clamp(2rem,5vw,3.5rem)">
+    <div class="countdown" id="countdown" aria-live="polite">
+      <p class="cd-lab" style="width:100%;margin:0">Manca</p>
+    </div>
+  </div>
+</section>
+
+<svg class="tiles" width="100%" height="34" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="maiolica" width="30" height="34" patternUnits="userSpaceOnUse">
+      <path d="M15 4 L26 17 L15 30 L4 17 Z" fill="none" stroke="currentColor" stroke-width="1"/>
+      <path d="M15 11 L21 17 L15 23 L9 17 Z" fill="currentColor" opacity=".35"/>
+      <circle cx="0" cy="17" r="2.4" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="30" cy="17" r="2.4" fill="none" stroke="currentColor" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="34" fill="url(#maiolica)"/>
+</svg>
+
+<section id="programma">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Il giorno</p>
+      <h2 class="sec-title">Il programma</h2>
+      <p class="lede">Gli orari sono indicativi, tranne quello della cerimonia: per quello vi aspettiamo puntuali.</p>
+    </div>
+    <ol class="timeline">
+      <li>
+        <div class="t-time"><span class="ph">10.30</span></div>
+        <div>
+          <div class="t-name">Arrivo degli invitati</div>
+          <p class="t-desc">Ci troviamo davanti alla <span class="ph">chiesa</span>. Ci sarà qualcuno ad accogliervi e ad accompagnarvi ai posti.</p>
+        </div>
+      </li>
+      <li>
+        <div class="t-time"><span class="ph">11.00</span></div>
+        <div>
+          <div class="t-name">Cerimonia</div>
+          <p class="t-desc">Durata di circa un'ora.</p>
+        </div>
+      </li>
+      <li>
+        <div class="t-time"><span class="ph">12.30</span></div>
+        <div>
+          <div class="t-name">Aperitivo</div>
+          <p class="t-desc">Ci spostiamo in <span class="ph">villa</span>, nel giardino affacciato sul mare.</p>
+        </div>
+      </li>
+      <li>
+        <div class="t-time"><span class="ph">14.00</span></div>
+        <div>
+          <div class="t-name">Pranzo</div>
+          <p class="t-desc">Tavoli assegnati, il tableau è all'ingresso della sala.</p>
+        </div>
+      </li>
+      <li>
+        <div class="t-time"><span class="ph">17.30</span></div>
+        <div>
+          <div class="t-name">Taglio della torta</div>
+          <p class="t-desc">E poi si balla.</p>
+        </div>
+      </li>
+      <li>
+        <div class="t-time"><span class="ph">24.00</span></div>
+        <div>
+          <div class="t-name">Saluti</div>
+          <p class="t-desc">Chi vuole restare fino alla fine, è il benvenuto.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="dove">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Come arrivare</p>
+      <h2 class="sec-title">I luoghi</h2>
+    </div>
+    <div class="places">
+      <article class="place">
+        <p class="eyebrow">Cerimonia</p>
+        <h3><span class="ph">Chiesa di Santa Maria</span></h3>
+        <p class="addr"><span class="ph">Via Example 1, 80100 Napoli (NA)</span></p>
+        <p class="addr">Parcheggio disponibile <span class="ph">a 200 metri, in Piazza Example</span>.</p>
+        <p class="map"><a href="https://www.google.com/maps" target="_blank" rel="noopener">Apri in Google Maps &rarr;</a></p>
+      </article>
+      <article class="place">
+        <p class="eyebrow">Ricevimento</p>
+        <h3><span class="ph">Villa Example</span></h3>
+        <p class="addr"><span class="ph">Via Example 25, 80100 Napoli (NA)</span></p>
+        <p class="addr"><span class="ph">A 15 minuti di auto dalla chiesa.</span> Parcheggio interno con servizio di accoglienza.</p>
+        <p class="map"><a href="https://www.google.com/maps" target="_blank" rel="noopener">Apri in Google Maps &rarr;</a></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="info">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Prima di partire</p>
+      <h2 class="sec-title">Info utili</h2>
+    </div>
+    <dl class="facts">
+      <div class="fact">
+        <dt>Dress code</dt>
+        <dd><span class="ph">Abito formale. Il giardino è su prato: consigliamo tacchi larghi o zeppe.</span></dd>
+      </div>
+      <div class="fact">
+        <dt>Navetta</dt>
+        <dd><span class="ph">Una navetta collega la chiesa alla villa alle 12.15 e riporta in centro a mezzanotte.</span> Segnalatelo nel modulo di conferma se volete usarla.</dd>
+      </div>
+      <div class="fact">
+        <dt>Dove dormire</dt>
+        <dd><span class="ph">Abbiamo tenuto alcune camere convenzionate all'Hotel Example: citate "Nozze Cerrone" alla prenotazione.</span></dd>
+      </div>
+      <div class="fact">
+        <dt>Bambini</dt>
+        <dd><span class="ph">Sono i benvenuti: c'è un'area dedicata con animazione dalle 14 alle 18.</span></dd>
+      </div>
+      <div class="fact">
+        <dt>Allergie e intolleranze</dt>
+        <dd>Scrivetecele nel modulo di conferma, il catering prepara i menu alternativi.</dd>
+      </div>
+      <div class="fact">
+        <dt>Foto</dt>
+        <dd>Durante la cerimonia vi chiediamo di lasciare il telefono in tasca. Per tutto il resto, usate l'hashtag <span class="ph">#CerroneNozze</span>.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section id="regali">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Se volete</p>
+      <h2 class="sec-title">Lista nozze</h2>
+      <p class="lede">La vostra presenza è già il regalo. Per chi volesse contribuire, stiamo mettendo da parte per <span class="ph">il viaggio di nozze in Giappone</span>.</p>
+    </div>
+    <div class="gift">
+      <p class="eyebrow">Iban</p>
+      <div class="iban">
+        <code id="iban" class="ph">IT00 X000 0000 0000 0000 0000 000</code>
+        <button type="button" class="copy" id="copy-iban">Copia</button>
+      </div>
+      <p style="margin-top:.9rem;color:var(--ink-soft);font-size:var(--step--1)">Intestato a <span class="ph">Riccardo Cerrone</span>. Causale: <span class="ph">Nozze</span>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="rsvp" class="rsvp">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Entro <span class="ph">il 30 aprile</span></p>
+      <h2 class="sec-title">Fateci sapere</h2>
+      <p class="lede">Compilate i campi e premete invia: si apre WhatsApp con il messaggio già pronto, dovete solo spedirlo.</p>
+    </div>
+    <form id="rsvp-form" novalidate>
+      <div class="row">
+        <label for="f-nome">Nome e cognome
+          <input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Come sta sulla partecipazione">
+        </label>
+        <label for="f-ospiti">Quante persone
+          <input id="f-ospiti" name="ospiti" type="number" min="1" max="12" step="1" value="1" inputmode="numeric">
+        </label>
+      </div>
+      <fieldset>
+        <legend>Ci sarete?</legend>
+        <label class="choice" for="f-si"><input type="radio" id="f-si" name="presenza" value="Ci saremo" checked> Ci saremo</label>
+        <label class="choice" for="f-no"><input type="radio" id="f-no" name="presenza" value="Purtroppo non possiamo esserci"> Purtroppo non possiamo esserci</label>
+      </fieldset>
+      <div class="row">
+        <label for="f-menu">Menu
+          <select id="f-menu" name="menu">
+            <option>Nessuna esigenza particolare</option>
+            <option>Vegetariano</option>
+            <option>Vegano</option>
+            <option>Senza glutine</option>
+            <option>Menu bambino</option>
+          </select>
+        </label>
+        <label for="f-navetta">Navetta
+          <select id="f-navetta" name="navetta">
+            <option>Non serve</option>
+            <option>Sì, andata</option>
+            <option>Sì, ritorno</option>
+            <option>Sì, andata e ritorno</option>
+          </select>
+        </label>
+      </div>
+      <label for="f-note">Allergie, intolleranze o altro
+        <textarea id="f-note" name="note" placeholder="Es. un'allergia alle noci, oppure arriviamo il giorno prima"></textarea>
+      </label>
+      <div class="send">
+        <a class="btn" id="send-wa" href="#" target="_blank" rel="noopener">Invia su WhatsApp</a>
+        <a class="btn btn-ghost" id="send-mail" href="#">Invia per email</a>
+        <small>Andiamo a <span class="ph">+39 000 000 0000</span> / <span class="ph">nozze@example.it</span></small>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="mark"><span class="ph">Riccardo</span> <em>&amp;</em> <span class="ph">Giulia</span></div>
+    <span><span class="ph">12 giugno 2027</span> &middot; <span class="ph">Napoli</span></span>
+    <span>Per qualsiasi cosa: <a href="tel:+390000000000" class="ph">+39 000 000 0000</a></span>
+  </div>
+</footer>
+
+<script>
+/* ===== Dati da personalizzare ===== */
+var DATA_NOZZE = new Date("2027-06-12T11:00:00+02:00"); /* SEGNAPOSTO */
+var TELEFONO_WA = "390000000000";                       /* SEGNAPOSTO: solo cifre, con prefisso */
+var EMAIL_RSVP  = "nozze@example.it";                   /* SEGNAPOSTO */
+
+/* ===== Countdown ===== */
+(function(){
+  var box = document.getElementById("countdown");
+  if(!box) return;
+  function plural(n, uno, molti){ return n === 1 ? uno : molti; }
+  function render(){
+    var ms = DATA_NOZZE - new Date();
+    if(ms <= 0){
+      box.innerHTML = '<p class="cd-done">Oggi è il giorno.</p>';
+      return;
+    }
+    var tot = Math.floor(ms/1000);
+    var g = Math.floor(tot/86400),
+        o = Math.floor(tot%86400/3600),
+        m = Math.floor(tot%3600/60);
+    var parts = [
+      [g, plural(g,"giorno","giorni")],
+      [o, plural(o,"ora","ore")],
+      [m, plural(m,"minuto","minuti")]
+    ];
+    var html = '<p class="cd-lab" style="width:100%;margin:0">Manca</p>';
+    for(var i=0;i<parts.length;i++){
+      html += '<span class="cd-item"><span class="cd-num">'+parts[i][0]+'</span><span class="cd-lab">'+parts[i][1]+'</span></span>';
+    }
+    box.innerHTML = html;
+  }
+  render();
+  setInterval(render, 30000);
+})();
+
+/* ===== RSVP: compone il messaggio ===== */
+(function(){
+  var form = document.getElementById("rsvp-form");
+  if(!form) return;
+  var wa = document.getElementById("send-wa");
+  var mail = document.getElementById("send-mail");
+
+  function val(id){ var el = document.getElementById(id); return el ? String(el.value).trim() : ""; }
+
+  function messaggio(){
+    var presenzaEl = form.querySelector('input[name="presenza"]:checked');
+    var presenza = presenzaEl ? presenzaEl.value : "Ci saremo";
+    var nome = val("f-nome") || "(nome non indicato)";
+    var righe = [
+      "RSVP — " + nome,
+      presenza,
+      "Persone: " + (val("f-ospiti") || "1"),
+      "Menu: " + val("f-menu"),
+      "Navetta: " + val("f-navetta")
+    ];
+    var note = val("f-note");
+    if(note) righe.push("Note: " + note);
+    return righe.join("\n");
+  }
+
+  function aggiorna(){
+    var testo = messaggio();
+    wa.href = "https://wa.me/" + TELEFONO_WA + "?text=" + encodeURIComponent(testo);
+    mail.href = "mailto:" + EMAIL_RSVP +
+      "?subject=" + encodeURIComponent("Conferma presenza — " + (val("f-nome") || "invitato")) +
+      "&body=" + encodeURIComponent(testo);
+  }
+
+  form.addEventListener("input", aggiorna);
+  form.addEventListener("change", aggiorna);
+  form.addEventListener("submit", function(e){ e.preventDefault(); aggiorna(); wa.click(); });
+  aggiorna();
+})();
+
+/* ===== Copia IBAN ===== */
+(function(){
+  var btn = document.getElementById("copy-iban");
+  var code = document.getElementById("iban");
+  if(!btn || !code) return;
+  btn.addEventListener("click", function(){
+    var testo = code.textContent.replace(/\s+/g, "");
+    function fatto(){ btn.textContent = "Copiato"; setTimeout(function(){ btn.textContent = "Copia"; }, 2000); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(testo).then(fatto, function(){ btn.textContent = "Copia a mano"; });
+    } else {
+      var ta = document.createElement("textarea");
+      ta.value = testo; document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); fatto(); } catch(err){ btn.textContent = "Copia a mano"; }
+      document.body.removeChild(ta);
+    }
+  });
+})();
+</script>
+</body>
+</html>
