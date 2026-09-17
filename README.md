@@ -1,33 +1,47 @@
 # Cerrone Nozze
 
-Sito statico per il matrimonio. Nessuna build, nessuna dipendenza: un solo file.
+Sito dello studio di organizzazione matrimoni ed eventi — cerronenozze.it
+
+Sito statico: nessuna build, nessuna dipendenza, un solo file.
 
 ## File
 
 | File | A cosa serve |
 | --- | --- |
 | `index.html` | Il sito. Markup, CSS e JS in un unico file: aprilo nel browser e lo vedi. |
-| `tools/build-artifact.py` | Genera `build/artifact.html`, la copia da pubblicare come anteprima su claude.ai. |
+| `tools/build-artifact.py` | Genera `build/artifact.html`, la copia pubblicata come anteprima su claude.ai. |
+
+## Struttura della pagina
+
+Pagina singola con ancore: servizi, metodo di lavoro, realizzazioni, chi siamo,
+testimonianze, richiesta preventivo.
+
+Il modulo preventivo non ha backend: compone un messaggio WhatsApp o una email
+precompilata con i dati inseriti. Non invia e non salva nulla, quindi non serve
+un server ne' un'informativa sul trattamento dei dati raccolti dal sito.
 
 ## Personalizzare
 
-I testi provvisori sono marcati con `class="ph"` e appaiono evidenziati in giallo
-nella pagina, insieme a una barra "Bozza" in cima. Per trovarli tutti:
+I contenuti provvisori sono marcati `class="ph"` e appaiono evidenziati in giallo,
+insieme alla barra "Bozza" in cima. Per elencarli tutti:
 
 ```
 grep -n 'class="ph"' index.html
 ```
 
-I tre valori che stanno nel JavaScript, in fondo a `index.html`:
+Le due costanti in fondo a `index.html`:
 
-- `DATA_NOZZE` — data e ora della cerimonia, usata dal countdown
-- `TELEFONO_WA` — numero WhatsApp che riceve le conferme (solo cifre, con prefisso)
-- `EMAIL_RSVP` — indirizzo email alternativo per le conferme
+- `TELEFONO_WA` — numero WhatsApp che riceve le richieste (solo cifre, con prefisso)
+- `EMAIL_INFO` — indirizzo email per le richieste
+
+Le foto sono riquadri segnaposto (`<div class="photo">`): vanno sostituiti con
+`<img src="..." alt="...">`, mettendo i file in una cartella `img/`.
 
 Quando i contenuti sono definitivi si tolgono la barra `<div class="draft">`,
-la classe `ph` e la regola `.ph` nel CSS.
+la classe `ph` e le due regole `.ph` nel CSS.
 
 ## Pubblicare
 
-Il sito e' un file statico: va su GitHub Pages, Netlify o qualsiasi hosting
-copiando `index.html`. Per GitHub Pages: Settings > Pages > Deploy from a branch.
+Il sito e' un file statico: va su qualsiasi hosting copiando `index.html`
+(piu' la cartella `img/` quando ci sara'). Per GitHub Pages:
+Settings > Pages > Deploy from a branch.
